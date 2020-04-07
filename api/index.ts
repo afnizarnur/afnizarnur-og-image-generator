@@ -4,7 +4,7 @@ import fs from "fs"
 import path from "path"
 import puppeteer from "puppeteer-core"
 
-const loadFont = file => {
+const loadFont = (file) => {
   const font = fs.readFileSync(path.join(__dirname, `../static/${file}`))
   return font.toString("base64")
 }
@@ -19,8 +19,8 @@ const generateHTML = (title = "Hello world") => {
 
       html {
         width: 1200px;
-        height: 1200px;
-        background-color: #F7F4ED;
+        height: 628px;
+        background-image: linear-gradient(180deg, rgba(25,26,27,0.07) 0%, rgba(255,255,255,0.00) 100%);
       }
 
       body {
@@ -28,44 +28,45 @@ const generateHTML = (title = "Hello world") => {
       }
 
       @font-face {
-        font-family: 'Ayer Poster Angular';
-        font-style: italic;
-        font-weight: bold;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
         src: url('data:font/woff2;base64,${loadFont(
-          "AyerPosterAngular-SemiboldItalic-Web.woff2"
+          "Inter-Bold.woff2"
         )}') format('woff2');
       }
 
       @font-face {
-        font-family: 'National 2';
-        font-style: italic;
+        font-family: 'Inter';
+        font-style: normal;
         src: url('data:font/woff2;base64,${loadFont(
-          "National2Web-RegularItalic.woff2"
+          "Inter-Regular.woff2"
         )}') format('woff2');
       }
 
       .title {
-        font: 144px/1 "Ayer Poster Angular", serif;
-        color: #FC6A00;
-        max-width: 1024px;
+        font: 96px/1 "Inter", sans-serif;
+        font-weight: 700;
+        color: #191A1B;
+        max-width: 1008px;
       }
 
       .title p {
         position: absolute;
         top: 50%;
-        left: 66px;
-        transform: translateY(-55%);
+        left: 96px;
+        transform: translateY(-10%);
         margin: 0;
       }
 
       .author {
-        font: 36px/1 "National 2", sans-serif;
-        font-style: italic;
-        color: #441C17;
-        transform: rotate(-90deg) translateY(300%);
+        font: 36px/1 "Inter", sans-serif;
+        font-style: normal;
+        color: #191A1B;
+        opacity: .8;
         position: absolute;
-        top: 50%;
-        right: 0;
+        bottom: 10%;
+        left: 96px;
       }
     </style>
     
@@ -73,13 +74,13 @@ const generateHTML = (title = "Hello world") => {
       <p>${title.replace(/ ([^ ]*)$/, "\u00A0$1")}</p>
     </div>
     
-    <p class="author">Daniel Eden, Designer</p>
+    <p class="author">Afnizar Nur Ghifari, Designer</p>
     
   </html>
   `
 }
 
-const getScreenshot = async function({ html, type = "png" }) {
+const getScreenshot = async function ({ html, type = "png" }) {
   if (!html) {
     throw Error("You must provide an html property.")
   }
@@ -94,7 +95,7 @@ const getScreenshot = async function({ html, type = "png" }) {
   await page.setContent(html, { waitUntil: "networkidle2" })
   const element = await page.$("html")
   await page.evaluateHandle("document.fonts.ready")
-  return await element.screenshot({ type }).then(async data => {
+  return await element.screenshot({ type }).then(async (data) => {
     await browser.close()
     return data
   })
