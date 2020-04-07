@@ -55,7 +55,9 @@ const generateHTML = (title = "Hello world") => {
         position: absolute;
         top: 50%;
         left: 96px;
-        transform: translateY(-10%);
+        letter-spacing: -1.8px;
+        transform: translateY(-70%);
+        line-height: 1.1;
         margin: 0;
       }
 
@@ -65,7 +67,7 @@ const generateHTML = (title = "Hello world") => {
         color: #191A1B;
         opacity: .8;
         position: absolute;
-        bottom: 10%;
+        bottom: 80px;
         left: 96px;
       }
     </style>
