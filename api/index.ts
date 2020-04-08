@@ -20,7 +20,7 @@ const generateHTML = (title = "Hello world") => {
       html {
         width: 1200px;
         height: 628px;
-        background-image: linear-gradient(180deg, rgba(25,26,27,0.07) 0%, rgba(255,255,255,0.00) 100%);
+        background: #F0F0F0;
       }
 
       body {
